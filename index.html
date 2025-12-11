@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Minhas Tarefas</h1>
+            <p class="subtitle">Organize seu dia de forma eficiente</p>
+        </header>
+
+        <div class="todo-form">
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    id="taskInput" 
+                    placeholder="Digite uma nova tarefa..." 
+                    autocomplete="off"
+                >
+                <button id="addTaskBtn" class="add-btn">
+                    <span class="btn-icon">+</span>
+                    Adicionar
+                </button>
+            </div>
+        </div>
+
+        <div class="todo-stats">
+            <span id="totalTasks">0 tarefas</span>
+            <span id="completedTasks">0 concluídas</span>
+        </div>
+
+        <div class="todo-list-container">
+            <ul id="todoList" class="todo-list"></ul>
+            <div id="emptyState" class="empty-state">
+                <div class="empty-icon">📝</div>
+                <p>Nenhuma tarefa cadastrada ainda</p>
+                <p class="empty-hint">Adicione uma nova tarefa acima para começar</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
