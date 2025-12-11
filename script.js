@@ -12,11 +12,41 @@ const STORAGE_KEY = 'todoTasks';
 // Array para armazenar as tarefas
 let tasks = [];
 
+// Formatador de data/hora
+const dateTimeFormatter = new Intl.DateTimeFormat('pt-BR', {
+    dateStyle: 'short',
+    timeStyle: 'short'
+});
+
+// Normalizar estrutura das tarefas existentes
+function normalizeTask(task) {
+    const fallbackDate = new Date(task.id).toISOString();
+    return {
+        ...task,
+        createdAt: task.createdAt || fallbackDate,
+        completedAt: task.completed ? (task.completedAt || fallbackDate) : null
+    };
+}
+
+// Formatar data/hora para exibição
+function formatDateTime(dateString) {
+    if (!dateString) {
+        return 'pendente';
+    }
+
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) {
+        return 'pendente';
+    }
+
+    return dateTimeFormatter.format(date);
+}
+
 // Carregar tarefas do localStorage ao iniciar
 function loadTasks() {
     const storedTasks = localStorage.getItem(STORAGE_KEY);
     if (storedTasks) {
-        tasks = JSON.parse(storedTasks);
+        tasks = JSON.parse(storedTasks).map(normalizeTask);
         renderTasks();
     } else {
         showEmptyState();
@@ -38,10 +68,13 @@ function addTask() {
         return;
     }
 
+    const timestamp = new Date().toISOString();
     const newTask = {
         id: Date.now(),
         text: taskText,
-        completed: false
+        completed: false,
+        createdAt: timestamp,
+        completedAt: null
     };
 
     tasks.push(newTask);
@@ -57,7 +90,9 @@ function addTask() {
 function toggleTask(id) {
     const task = tasks.find(t => t.id === id);
     if (task) {
-        task.completed = !task.completed;
+        const isCompleted = !task.completed;
+        task.completed = isCompleted;
+        task.completedAt = isCompleted ? new Date().toISOString() : null;
         saveTasks();
         renderTasks();
     }
@@ -90,10 +125,30 @@ function renderTasks() {
         checkbox.className = `todo-checkbox ${task.completed ? 'checked' : ''}`;
         checkbox.addEventListener('click', () => toggleTask(task.id));
         
-        // Texto da tarefa
+        // Conteúdo da tarefa
+        const content = document.createElement('div');
+        content.className = 'todo-content';
+
         const text = document.createElement('span');
         text.className = 'todo-text';
         text.textContent = task.text;
+
+        const times = document.createElement('div');
+        times.className = 'todo-times';
+
+        const startTime = document.createElement('span');
+        startTime.className = 'todo-time';
+        startTime.textContent = `Início: ${formatDateTime(task.createdAt)}`;
+
+        const endTime = document.createElement('span');
+        endTime.className = 'todo-time';
+        endTime.textContent = `Fim: ${task.completedAt ? formatDateTime(task.completedAt) : 'pendente'}`;
+
+        times.appendChild(startTime);
+        times.appendChild(endTime);
+
+        content.appendChild(text);
+        content.appendChild(times);
         
         // Botão de excluir
         const deleteBtn = document.createElement('button');
@@ -103,7 +158,7 @@ function renderTasks() {
         deleteBtn.addEventListener('click', () => deleteTask(task.id));
         
         li.appendChild(checkbox);
-        li.appendChild(text);
+        li.appendChild(content);
         li.appendChild(deleteBtn);
         
         todoList.appendChild(li);
