@@ -60,6 +60,104 @@ header h1 {
     font-weight: 400;
 }
 
+.top-nav {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 18px var(--shadow);
+    transform: translateY(-1px);
+}
+
+.page-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 26px;
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+.section-title {
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+    color: var(--text-primary);
+}
+
+.random-result {
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 18px 18px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.random-text {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    word-break: break-word;
+}
+
+.random-meta {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.random-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-primary);
+    padding: 12px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.btn:hover:not(:disabled) {
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px var(--shadow);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.hint-text {
+    margin-top: 14px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
 .todo-form {
     margin-bottom: 30px;
     animation: fadeInUp 0.6s ease-out 0.2s both;
@@ -342,6 +440,10 @@ header h1 {
 
     header h1 {
         font-size: 2rem;
+    }
+
+    .page-card {
+        padding: 18px;
     }
 
     .input-group {
