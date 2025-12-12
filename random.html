@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página aleatória</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Página aleatória</h1>
+            <p class="subtitle">Um gerador de micro-desafios pra destravar o dia</p>
+
+            <nav class="top-nav" aria-label="Navegação">
+                <a class="nav-link" href="index.html">← Voltar para tarefas</a>
+            </nav>
+        </header>
+
+        <main class="page-card" role="main">
+            <section class="random-section" aria-labelledby="randomTitle">
+                <h2 id="randomTitle" class="section-title">Seu desafio de agora</h2>
+
+                <div class="random-result" role="status" aria-live="polite">
+                    <p id="randomText" class="random-text">Clique em “Gerar” para receber um desafio.</p>
+                    <p id="randomMeta" class="random-meta"></p>
+                </div>
+
+                <div class="random-actions">
+                    <button id="generateBtn" class="btn btn-primary" type="button">Gerar</button>
+                    <button id="copyBtn" class="btn" type="button" disabled>Copiar</button>
+                </div>
+
+                <p class="hint-text">Dica: gere alguns até achar um que caiba em 5–10 minutos.</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="random.js"></script>
+</body>
+</html>
