@@ -98,15 +98,17 @@ body {
 
 .poll-fieldset {
   border: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 12px;
 }
 
 .option {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  column-gap: 12px;
+  align-items: start;
+  width: 100%;
   padding: 14px 14px;
   border-radius: 14px;
   border: 1px solid var(--border);
@@ -123,7 +125,7 @@ body {
 }
 
 .option input[type="radio"] {
-  margin-top: 3px;
+  margin: 3px 0 0 0;
   accent-color: var(--primary);
 }
 
@@ -132,6 +134,12 @@ body {
   flex-direction: column;
   gap: 6px;
   width: 100%;
+  min-width: 0;
+}
+
+.option:focus-within {
+  border-color: rgba(124, 58, 237, 0.75);
+  box-shadow: 0 0 0 4px var(--ring);
 }
 
 .option-title {
