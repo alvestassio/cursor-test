@@ -18,6 +18,7 @@
   --shadow: rgba(0, 0, 0, 0.35);
   --ring: rgba(124, 58, 237, 0.25);
   --maxw: 900px;
+  --dock-space: 340px;
 }
 
 body {
@@ -30,6 +31,7 @@ body {
   color: var(--text);
   min-height: 100vh;
   padding: 24px;
+  padding-bottom: calc(24px + var(--dock-space));
   line-height: 1.55;
 }
 
@@ -37,6 +39,10 @@ body {
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 34px 18px;
+}
+
+.content {
+  margin-top: 18px;
 }
 
 .header {
@@ -256,6 +262,28 @@ body {
   margin-top: 18px;
 }
 
+.results-dock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  padding: 16px 24px 24px;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 11, 20, 0) 0%,
+    rgba(7, 11, 20, 0.92) 35%,
+    rgba(7, 11, 20, 0.98) 100%
+  );
+}
+
+.results-dock-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  max-height: min(42vh, var(--dock-space));
+  overflow: auto;
+}
+
 .results-head {
   display: flex;
   align-items: baseline;
@@ -351,6 +379,7 @@ body {
 @media (max-width: 600px) {
   body {
     padding: 16px;
+    padding-bottom: calc(16px + var(--dock-space));
   }
 
   .card {

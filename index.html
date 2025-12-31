@@ -17,7 +17,7 @@
       </p>
     </header>
 
-    <main class="card" role="main" aria-labelledby="pollTitle">
+    <main class="content" role="main" aria-labelledby="pollTitle">
       <h2 id="pollTitle" class="section-title">Opções</h2>
 
       <form id="pollForm" class="poll" autocomplete="off">
@@ -112,16 +112,18 @@
         <p id="status" class="status" role="status" aria-live="polite"></p>
       </form>
     </main>
+  </div>
 
-    <section class="card results" aria-labelledby="resultsTitle">
+  <section class="results-dock" aria-labelledby="resultsTitle">
+    <div class="results-dock-inner card">
       <div class="results-head">
-        <h2 id="resultsTitle" class="section-title">Resultado</h2>
+        <h2 id="resultsTitle" class="section-title">Votos</h2>
         <p class="results-subtitle" id="resultsSubtitle"></p>
       </div>
       <div id="resultsList" class="bars" aria-live="polite"></div>
       <div id="suggestions" class="suggestions" hidden></div>
-    </section>
-  </div>
+    </div>
+  </section>
 
   <script src="script.js"></script>
 </body>
