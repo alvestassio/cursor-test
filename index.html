@@ -1,52 +1,128 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarefas diarias</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enquete dos jogos</title>
+  <meta name="description" content="Enquete online com votos salvos no seu navegador.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Tarefas diarias</h1>
-            <p class="subtitle">Organize seu dia de forma eficiente</p>
-            <nav class="top-nav" aria-label="Navegação">
-                <a class="nav-link" href="random.html">Página aleatória →</a>
-            </nav>
-        </header>
+  <div class="container">
+    <header class="header">
+      <p class="badge" aria-hidden="true">Enquete online</p>
+      <h1>Como vocês querem fazer os 2 jogos?</h1>
+      <p class="subtitle">
+        Vote e veja o resultado salvo no seu navegador (localStorage).
+      </p>
+    </header>
 
-        <div class="todo-form">
-            <div class="input-group">
-                <input 
-                    type="text" 
-                    id="taskInput" 
-                    placeholder="Digite uma nova tarefa..." 
-                    autocomplete="off"
-                >
-                <button id="addTaskBtn" class="add-btn">
-                    <span class="btn-icon">+</span>
-                    Adicionar
-                </button>
-            </div>
+    <main class="card" role="main" aria-labelledby="pollTitle">
+      <h2 id="pollTitle" class="section-title">Opções</h2>
+
+      <form id="pollForm" class="poll" autocomplete="off">
+        <fieldset class="poll-fieldset">
+          <legend class="sr-only">Escolha uma opção</legend>
+
+          <label class="option" for="opt1">
+            <input id="opt1" name="vote" type="radio" value="opt1">
+            <span class="option-body">
+              <span class="option-title">Opção 1</span>
+              <span class="option-desc">
+                <strong>Jogo 1:</strong> cada pessoa sugere um número; a gente
+                vota e fecha os <strong>9 números</strong>. <br>
+                <strong>Jogo 2:</strong> mesma dinâmica; fecha os
+                <strong>7 números</strong>.
+              </span>
+              <span class="option-detail">
+                Boa quando o grupo quer participar, mas ainda manter consenso.
+              </span>
+            </span>
+          </label>
+
+          <label class="option" for="opt2">
+            <input id="opt2" name="vote" type="radio" value="opt2">
+            <span class="option-body">
+              <span class="option-title">Opção 2</span>
+              <span class="option-desc">
+                Escolhemos duas <strong>surpresinhas</strong>; a caixa sorteia
+                os números.
+              </span>
+              <span class="option-detail">
+                Mais rápido; menos discussão; 100% aleatório (e já teve ganhador
+                kkk).
+              </span>
+            </span>
+          </label>
+
+          <label class="option" for="opt3">
+            <input id="opt3" name="vote" type="radio" value="opt3">
+            <span class="option-body">
+              <span class="option-title">Opção 3</span>
+              <span class="option-desc">
+                Elegemos <strong>2 pessoas</strong>; cada uma monta um jogo.
+              </span>
+              <span class="option-detail">
+                Bom quando querem delegar e andar rápido; dá pra variar estilos
+                de jogo.
+              </span>
+            </span>
+          </label>
+
+          <label class="option" for="opt4">
+            <input id="opt4" name="vote" type="radio" value="opt4">
+            <span class="option-body">
+              <span class="option-title">Outras opções</span>
+              <span class="option-desc">
+                Vocês sugerem uma alternativa.
+              </span>
+              <span class="option-detail">
+                Escreva sua sugestão; ela fica salva junto do seu voto.
+              </span>
+            </span>
+          </label>
+        </fieldset>
+
+        <div id="suggestionWrap" class="suggestion" hidden>
+          <label class="field">
+            <span class="field-label">Sua sugestão</span>
+            <textarea
+              id="suggestionInput"
+              rows="3"
+              placeholder="Ex.: cada pessoa escolhe 1 número fixo e a gente completa por votação..."
+            ></textarea>
+            <span class="field-hint" id="suggestionHint">
+              Dica: escreva pelo menos 3 caracteres.
+            </span>
+          </label>
         </div>
 
-        <div class="todo-stats">
-            <span id="totalTasks">0 tarefas</span>
-            <span id="completedTasks">0 concluídas</span>
+        <div class="actions">
+          <button id="voteBtn" class="btn btn-primary" type="submit">
+            Confirmar voto
+          </button>
+          <button id="changeBtn" class="btn" type="button" hidden>
+            Alterar voto
+          </button>
+          <button id="resetBtn" class="btn btn-danger" type="button">
+            Limpar dados deste navegador
+          </button>
         </div>
 
-        <div class="todo-list-container">
-            <ul id="todoList" class="todo-list"></ul>
-            <div id="emptyState" class="empty-state">
-                <div class="empty-icon">📝</div>
-                <p>Nenhuma tarefa cadastrada ainda</p>
-                <p class="empty-hint">Adicione uma nova tarefa acima para começar</p>
-            </div>
-        </div>
-    </div>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </form>
+    </main>
 
-    <script src="script.js"></script>
+    <section class="card results" aria-labelledby="resultsTitle">
+      <div class="results-head">
+        <h2 id="resultsTitle" class="section-title">Resultado</h2>
+        <p class="results-subtitle" id="resultsSubtitle"></p>
+      </div>
+      <div id="resultsList" class="bars" aria-live="polite"></div>
+      <div id="suggestions" class="suggestions" hidden></div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
-
